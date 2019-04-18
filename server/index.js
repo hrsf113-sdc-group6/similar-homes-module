@@ -4,9 +4,12 @@ const Sequelize = require('sequelize');
 const db = require('./db/index.js');
 const Home = require('./db/Home.js');
 
+const { getFunction } = require('../controller/index.js');
+
 const app = express();
 const port = process.env.PORT || 3004;
 
+app.listen(port, () => console.log(`yassss port ${port} is live!!!`));
 
 app.use('/similarhomes/:host_id', express.static(path.join(__dirname, '../client/dist')));
 
@@ -17,4 +20,8 @@ app.get('/similarhomes/:host_id/nearby', (req, res) => {
     .catch(err => res.status(404).end(err));
 });
 
-app.listen(port, () => console.log(`yassss port ${port} is live!!!`));
+app.get('/similarhomes/:host_id/nearby', (req, res) => {
+  Home.getFunction({ order: Sequelize.literal('rand()'), limit: 12 })
+    .then(data => res.send(data))
+    .catch(err => res.status(404).end(err));
+});
