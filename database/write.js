@@ -1,34 +1,4 @@
 const faker = require('faker');
-// const file = require('fs').createWriteStream('./k.csv');
-
-// (async () => {
-//   const k = 1000;
-//   const mil = 1e6 + 1;
-//   const tenMil = 1e7 + 1;
-//   for (let count = 0; count < k; count += 1) {
-//     const num = faker.random.number({ min: 1, max: 1030 });
-//     const propertyAvail = propertyType();
-//     const locationName = title();
-//     const photoUrl = `https://s3.amazonaws.com/similar-homes-module/city/city${num}.jpg`;
-//     const price = faker.random.number({ min: 77, max: 1982 });
-//     const rating = stars();
-//     const reviewCount = faker.random.number({ min: 17, max: 777 });
-
-//     if (count === 0) {
-//       const header = '_id, propertyAvail, locationName, photoUrl, price, rating, reviewCount\n';
-//       if (!file.write(header)) {
-//         await new Promise(resolve => file.once('drain', resolve));
-//       }
-//     } else {
-//       const row = `${count},${propertyAvail},"${locationName}",${photoUrl},${price},${rating},${reviewCount}\n`;
-//       if (!file.write(row)) {
-//         console.log('black magic');
-//         await new Promise(resolve => file.once('drain', resolve));
-//       }
-//     }
-//   }
-//   console.error(process.uptime());
-// })();
 
 (async () => {
   const k = 500;
@@ -45,7 +15,7 @@ const faker = require('faker');
 
   let num, propertyAvail, locationName, photoUrl, price, rating, reviewCount, buzzWord;
 
-  for (let count = 0; count < twomil; count += 1) {
+  for (let count = 0; count < tenMil; count += 1) {
     buzzWord = faker.company.bsAdjective();
     buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
 
@@ -58,7 +28,7 @@ const faker = require('faker');
     reviewCount = faker.random.number({ min: 17, max: 777 });
 
     const row = `${count},${propertyAvail},"${locationName}",${photoUrl},${price},${rating},${reviewCount}\n`;
-    // process.stdout.write(row);
+
     if (!process.stdout.write(row)) {
       await new Promise(resolve => file.once('drain', resolve));
     }
@@ -69,27 +39,3 @@ const faker = require('faker');
   }
   console.error(process.uptime());
 })();
-
-// function writeOneMillionTimes(writer, data, encoding, callback) {
-//   let i = 1000000;
-//   write();
-//   function write() {
-//     let ok = true;
-//     do {
-//       i--;
-//       if (i === 0) {
-//         // last time!
-//         writer.write(data, encoding, callback);
-//       } else {
-//         // See if we should continue, or wait.
-//         // Don't pass the callback, because we're not done yet.
-//         ok = writer.write(data, encoding);
-//       }
-//     } while (i > 0 && ok);
-//     if (i > 0) {
-//       // had to stop early!
-//       // write some more once it drains
-//       writer.once('drain', write);
-//     }
-//   }
-// }
