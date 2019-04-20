@@ -23,5 +23,4 @@ RelatedHomes.init({
   timestamps: false,
 });
 
-
 module.exports.RelatedHomes = RelatedHomes;

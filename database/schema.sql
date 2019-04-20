@@ -12,3 +12,5 @@ CREATE TABLE similarHomes (
   rating VARCHAR(255),
   reviewCount INT
 );
+
+-- \copy similarhomes FROM '/Users/simonchan/Desktop/HR/similar-homes-module/data.csv' DELIMITER ',' CSV HEADER;

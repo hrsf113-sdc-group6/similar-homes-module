@@ -1,23 +1,6 @@
 const faker = require('faker');
 // const file = require('fs').createWriteStream('./k.csv');
 
-// const propertyType = () => {
-//   const homeType = ['Entire home', 'Private room', 'Hotel Room', 'Shared Room'];
-//   return `${homeType[Math.floor(Math.random() * 3)]} • ${faker.address.city()}`;
-// };
-
-// const stars = () => {
-//   const array = ['2', '2.5', '3', '3.5', '4', '4.5', '5'];
-//   return array[Math.ceil(Math.random() * 6)];
-// };
-
-// const title = () => {
-//   const homeDescriptor = ['Studio', 'Loft', 'Apartment', 'House', 'Home', 'Condo', 'Cabin', 'Suite', 'Duplex', 'Town-Home', 'Villa', 'Vacation-House', 'Yurt', 'Bungaloo', 'Chalet', 'Penthouse', 'Terrace', 'Cottage', 'Yacht'];
-//   let buzzWord = faker.company.bsAdjective();
-//   buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
-//   return `${buzzWord} ${homeDescriptor[Math.floor(Math.random() * 17)]} in ${faker.address.city()}`;
-// };
-
 // (async () => {
 //   const k = 1000;
 //   const mil = 1e6 + 1;
@@ -50,6 +33,7 @@ const faker = require('faker');
 (async () => {
   const k = 500;
   const mil = 1e6 + 1;
+  const twomil = 2e6 + 1;
   const tenMil = 1e7 + 1;
 
   const header = '_id, propertyAvail, locationName, photoUrl, price, rating, reviewCount\n';
@@ -58,10 +42,10 @@ const faker = require('faker');
   const homeDescriptor = ['Studio', 'Loft', 'Apartment', 'House', 'Home', 'Condo', 'Cabin', 'Suite', 'Duplex', 'Town-Home', 'Villa', 'Vacation-House', 'Yurt', 'Bungaloo', 'Chalet', 'Penthouse', 'Terrace', 'Cottage', 'Yacht'];
 
   process.stdout.write(header);
-  // file.write(header);
+
   let num, propertyAvail, locationName, photoUrl, price, rating, reviewCount, buzzWord;
 
-  for (let count = 0; count < mil; count += 1) {
+  for (let count = 0; count < twomil; count += 1) {
     buzzWord = faker.company.bsAdjective();
     buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
 
@@ -78,8 +62,9 @@ const faker = require('faker');
     if (!process.stdout.write(row)) {
       await new Promise(resolve => file.once('drain', resolve));
     }
-    if (count % 100000 === 0) {
-      console.error(count, 'count');
+    if (count % 1e6 === 0) {
+      console.error(count, 'count per mil');
+      console.error(process.uptime());
     }
   }
   console.error(process.uptime());
