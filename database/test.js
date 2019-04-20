@@ -24,7 +24,7 @@ function generateUsers() {
   for (let count = 1; count <= 2; count += 1) {
     const num = faker.random.number({ min: 1, max: 1030 });
     users.push({
-      id: count,
+      _id: count,
       propertyAvail: propertyType(),
       locationName: title(),
       photoUrl: `https://s3.amazonaws.com/similar-homes-module/city/city${num}.jpg`,
