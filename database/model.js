@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const { db } = require('./index.js');
+const sequelize = require('./index.js');
 
-const { Model } = Sequelize.Model;
+const { Model } = Sequelize;
 
 class RelatedHomes extends Model {}
 RelatedHomes.init({
@@ -18,10 +18,10 @@ RelatedHomes.init({
   rating: Sequelize.STRING,
   reviewCount: Sequelize.INTEGER,
 }, {
-  modelName: 'similarHomes',
-  tableName: 'similarHomes',
-  timestamps: false,
   sequelize,
+  modelName: 'similarHomes',
+  timestamps: false,
 });
+
 
 module.exports.RelatedHomes = RelatedHomes;
