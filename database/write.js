@@ -1,22 +1,22 @@
 const faker = require('faker');
 // const file = require('fs').createWriteStream('./k.csv');
 
-const stars = () => {
-  const array = ['2', '2.5', '3', '3.5', '4', '4.5', '5'];
-  return array[Math.ceil(Math.random() * 6)];
-};
+// const propertyType = () => {
+//   const homeType = ['Entire home', 'Private room', 'Hotel Room', 'Shared Room'];
+//   return `${homeType[Math.floor(Math.random() * 3)]} • ${faker.address.city()}`;
+// };
 
-const propertyType = () => {
-  const homeType = ['Entire home', 'Private room', 'Hotel Room', 'Shared Room'];
-  return `${homeType[Math.floor(Math.random() * 3)]} • ${faker.address.city()}`;
-};
+// const stars = () => {
+//   const array = ['2', '2.5', '3', '3.5', '4', '4.5', '5'];
+//   return array[Math.ceil(Math.random() * 6)];
+// };
 
-const title = () => {
-  const homeDescriptor = ['Studio', 'Loft', 'Apartment', 'House', 'Home', 'Condo', 'Cabin', 'Suite', 'Duplex', 'Town-Home', 'Villa', 'Vacation-House', 'Yurt', 'Bungaloo', 'Chalet', 'Penthouse', 'Terrace', 'Cottage', 'Yacht'];
-  let buzzWord = faker.company.bsAdjective();
-  buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
-  return `${buzzWord} ${homeDescriptor[Math.floor(Math.random() * 17)]} in ${faker.address.city()}`;
-};
+// const title = () => {
+//   const homeDescriptor = ['Studio', 'Loft', 'Apartment', 'House', 'Home', 'Condo', 'Cabin', 'Suite', 'Duplex', 'Town-Home', 'Villa', 'Vacation-House', 'Yurt', 'Bungaloo', 'Chalet', 'Penthouse', 'Terrace', 'Cottage', 'Yacht'];
+//   let buzzWord = faker.company.bsAdjective();
+//   buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
+//   return `${buzzWord} ${homeDescriptor[Math.floor(Math.random() * 17)]} in ${faker.address.city()}`;
+// };
 
 // (async () => {
 //   const k = 1000;
@@ -53,24 +53,34 @@ const title = () => {
   const tenMil = 1e7 + 1;
 
   const header = '_id, propertyAvail, locationName, photoUrl, price, rating, reviewCount\n';
+  const homeType = ['Entire home', 'Private room', 'Hotel Room', 'Shared Room'];
+  const array = ['2', '2.5', '3', '3.5', '4', '4.5', '5'];
+  const homeDescriptor = ['Studio', 'Loft', 'Apartment', 'House', 'Home', 'Condo', 'Cabin', 'Suite', 'Duplex', 'Town-Home', 'Villa', 'Vacation-House', 'Yurt', 'Bungaloo', 'Chalet', 'Penthouse', 'Terrace', 'Cottage', 'Yacht'];
 
   process.stdout.write(header);
   // file.write(header);
+  let num, propertyAvail, locationName, photoUrl, price, rating, reviewCount, buzzWord;
 
   for (let count = 0; count < mil; count += 1) {
-    const num = faker.random.number({ min: 1, max: 1030 });
-    const propertyAvail = propertyType();
-    const locationName = title();
-    const photoUrl = `https://s3.amazonaws.com/similar-homes-module/city/city${num}.jpg`;
-    const price = faker.random.number({ min: 77, max: 1982 });
-    const rating = stars();
-    const reviewCount = faker.random.number({ min: 17, max: 777 });
+    buzzWord = faker.company.bsAdjective();
+    buzzWord = buzzWord[0].toUpperCase() + buzzWord.slice(1);
+
+    num = faker.random.number({ min: 1, max: 1030 });
+    propertyAvail = `${homeType[Math.floor(Math.random() * 3)]} • ${faker.address.city()}`;
+    locationName = `${buzzWord} ${homeDescriptor[Math.floor(Math.random() * 17)]} in ${faker.address.city()}`;
+    photoUrl = `https://s3.amazonaws.com/similar-homes-module/city/city${num}.jpg`;
+    price = faker.random.number({ min: 77, max: 1982 });
+    rating = array[Math.ceil(Math.random() * 6)];
+    reviewCount = faker.random.number({ min: 17, max: 777 });
 
     const row = `${count},${propertyAvail},"${locationName}",${photoUrl},${price},${rating},${reviewCount}\n`;
-    process.stdout.write(row);
-    // if (!file.write(row)) {
-    //   await new Promise(resolve => file.once('drain', resolve));
-    // }
+    // process.stdout.write(row);
+    if (!process.stdout.write(row)) {
+      await new Promise(resolve => file.once('drain', resolve));
+    }
+    if (count % 100000 === 0) {
+      console.error(count, 'count');
+    }
   }
   console.error(process.uptime());
 })();
