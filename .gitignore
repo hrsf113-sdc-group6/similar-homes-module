@@ -5,6 +5,8 @@ coverage
 .vscode
 .DS_Store
 
-
-
-data.csv
+mockGenerator/rich.js
+mockGenerator/richOG.js
+mockGenerator/tenMil.csv
+mockGenerator/tenMilGZIP.csv.gz
+mockGenerator/thousand.csv
