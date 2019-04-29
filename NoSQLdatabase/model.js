@@ -27,12 +27,12 @@ const MyModel = models.loadSchema('similar_homes', {
     rating: 'decimal',
     review_count: 'int',
   },
-  key: [['rating'], 'price', 'city'],
-  clusteringorder: {
-    "price": 'asc',
-    "rating": 'desc',
+  key: [['city'], 'price', 'rating', 'id'],
+  clustering_order: {
+    price: 'ASC',
+    rating: 'DESC',
   },
-  indexes: ['id'], // indexes might be wrong
+  indexes: ['id'],
 });
 
 // const MyModel = models.loadSchema('similar_homes', {
@@ -56,4 +56,4 @@ MyModel.syncDB((err, result) => {
 });
 
 // copy "similarhomes"."similar_homes" ("id", "city", "property_avail", "location_name", "photo_url", "price", "rating", "review_count") from '/Users/simonchan/Desktop/HR/similar-homes-module/mockGenerator/tenMil.csv' with delimiter = ',' and HEADER = true;
-// copy "similarhomes"."similar_homes" ("id", "city", "property_avail", "location_name", "photo_url", "price", "rating", "review_count") from '/Users/simonchan/Desktop/HR/similar-homes-module/mockGenerator/ten.csv' with delimiter = ',' and HEADER = true;
+// copy "similarhomes"."similar_homes" ("id", "city", "property_avail", "location_name", "photo_url", "price", "rating", "review_count") from '/Users/simonchan/Desktop/HR/similar-homes-module/mockGenerator/thousand.csv' with delimiter = ',' and HEADER = true;

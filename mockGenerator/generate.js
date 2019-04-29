@@ -38,7 +38,7 @@ const fs = require('fs').createWriteStream('./tenMil.csv');
     rating = array[Math.floor(Math.random() * 7)];
     reviewCount = faker.random.number({ min: 17, max: 777 });
 
-    const row = `${count},${city[num]},${propertyAvail},"${locationName}",${photoUrl},${price},${rating},${reviewCount}\n`;
+    const row = `${count},${city[num]},${propertyAvail},${locationName},${photoUrl},${price},${rating},${reviewCount}\n`;
 
     // if (!process.stdout.write(row)) {
     //   await new Promise(resolve => process.stdout.once('drain', resolve));

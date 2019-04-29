@@ -3,6 +3,8 @@ const sequelize = require('./index.js');
 
 const { Model } = Sequelize;
 
+const tableName = 'similar_homes';
+
 class RelatedHomes extends Model {}
 RelatedHomes.init({
   id: {
@@ -20,9 +22,10 @@ RelatedHomes.init({
   review_count: Sequelize.INTEGER,
 }, {
   sequelize,
-  modelName: 'similar_homes',
+  modelName: tableName,
   timestamps: false,
   underscored: true,
 });
 
 module.exports.RelatedHomes = RelatedHomes;
+module.exports.tableName = tableName;
