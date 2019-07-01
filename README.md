@@ -11,4 +11,4 @@ _________________________________________________________________
 | `/similarhomes/addhome`  | POST   | Add a related listing     |
 | `/similarhomes/:homeid`  | PATCH  | Update a related listing  |
 | `/similarhomes/:homeid`  | DELETE | Delete a related listing  |
-|__________________________|________|___________________________|
+|---------------------------------------------------------------|
