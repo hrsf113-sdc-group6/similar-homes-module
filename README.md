@@ -22,11 +22,11 @@ Only allowed a two column query with a single cluster sort
 
 ## CRUD API
 
-_________________________________________________________________
-| Endpoint                 | Type   | Operation                 |
-|--------------------------|--------|---------------------------|
-| `/similarhomes/:homeid`  | GET    | Get related listing       |
-| `/similarhomes/addhome`  | POST   | Add a related listing     |
-| `/similarhomes/:homeid`  | PATCH  | Update a related listing  |
-| `/similarhomes/:homeid`  | DELETE | Delete a related listing  |
-_________________________________________________________________
+_________________________________________________________________________
+| Endpoint                         | Type   | Operation                 |
+|----------------------------------|--------|---------------------------|
+| `/similarhomes/:host_id/nearby`  | GET    | Get related listing       |
+| `/similarhomes/:host_id/nearby`  | POST   | Add a related listing     |
+| `/similarhomes/:host_id/nearby`  | PATCH  | Update a related listing  |
+| `/similarhomes/:host_id/nearby`  | DELETE | Delete a related listing  |
+_________________________________________________________________________
