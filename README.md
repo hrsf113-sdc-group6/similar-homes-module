@@ -12,7 +12,8 @@ The similar homes module from Abode.ly was scaled and deployed through AWS EC2 i
 
 ### Cassandra
 
-![Only allowed a two column with a single cluster sort](gif/Cassandra.png)
+Only allowed a two column query with a single cluster sort
+![](gif/Cassandra.png)
 
 ### K6 Local testing & New Relic AWS testing
 
